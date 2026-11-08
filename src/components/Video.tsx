@@ -6,6 +6,12 @@ type VideoProps = {
 };
 
 export default function Video({ onPlaybackStart }: VideoProps) {
+  const embedUrl = new URL(weddingData.videoUrl);
+  embedUrl.searchParams.set("enablejsapi", "1");
+  embedUrl.searchParams.set("origin", window.location.origin);
+  const videoId = embedUrl.pathname.split("/").pop();
+  const watchUrl = `https://www.youtube.com/watch?v=${videoId}`;
+
   return (
     <section className="video-section section-pad">
       <Reveal>
@@ -16,7 +22,7 @@ export default function Video({ onPlaybackStart }: VideoProps) {
 
         <div className="video-frame">
           <iframe
-            src={weddingData.videoUrl}
+            src={embedUrl.toString()}
             title="Nishant and Diksha Wedding Invitation"
             loading="lazy"
             width={560}
@@ -30,7 +36,7 @@ export default function Video({ onPlaybackStart }: VideoProps) {
 
         <div className="video-actions">
           <a
-            href={weddingData.videoUrl.replace("/preview", "/view")}
+            href={watchUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="video-full-link"
