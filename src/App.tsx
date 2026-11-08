@@ -25,8 +25,8 @@ export default function App() {
         <Hero />
       </div>
       <main>
-        <Invitation />
         <DateReveal />
+        <Invitation />
         <Functions />
         <Couple />
         <Instagram />

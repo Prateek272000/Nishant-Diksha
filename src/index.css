@@ -200,47 +200,16 @@ select:focus-visible {
   will-change: transform;
 }
 
-.temple-half {
+.temple-image {
   position: absolute;
   inset: 0;
-  overflow: hidden;
-  will-change: transform;
-}
-
-.temple-half img {
-  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: contain;
   object-position: center bottom;
   mix-blend-mode: screen;
   filter: drop-shadow(0 14px 24px rgba(41, 28, 26, 0.12));
-}
-
-.temple-left {
-  clip-path: inset(0 50% 0 0);
-}
-
-.temple-right {
-  clip-path: inset(0 0 0 50%);
-}
-
-.temple-left img,
-.temple-right img {
-  width: 100%;
-}
-
-.portal-glow {
-  position: absolute;
-  z-index: -1;
-  left: 43%;
-  right: 43%;
-  top: 18%;
-  bottom: 0;
-  background: rgba(255, 231, 179, 0.95);
-  filter: blur(45px);
-  border-radius: 50%;
-  pointer-events: none;
+  will-change: opacity;
 }
 
 .scroll-cue {

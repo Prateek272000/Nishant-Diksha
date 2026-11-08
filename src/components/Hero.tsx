@@ -6,7 +6,6 @@ import {
 } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { useRef } from 'react';
-import { weddingData } from '../data/weddingData';
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
@@ -14,18 +13,8 @@ export default function Hero() {
     target: ref,
     offset: ['start start', 'end start'],
   });
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.8]);
-  const leftX = useTransform(
-    scrollYProgress,
-    [0, 0.42, 1],
-    ['0%', '-52%', '-76%'],
-  );
-  const rightX = useTransform(
-    scrollYProgress,
-    [0, 0.42, 1],
-    ['0%', '52%', '76%'],
-  );
-  const glow = useTransform(scrollYProgress, [0, 0.35, 0.8], [0, 0.85, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const templeOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const opacity = useTransform(scrollYProgress, [0.65, 1], [1, 0]);
   return (
     <section ref={ref} className="hero" aria-label="Wedding invitation cover">
@@ -41,32 +30,13 @@ export default function Hero() {
       </div>
       <motion.div
         className="temple-stage"
-        style={reduce ? undefined : { scale, opacity }}
+        style={reduce ? undefined : { scale, opacity: templeOpacity }}
       >
-        <motion.div
-          className="temple-half temple-left"
-          style={reduce ? undefined : { x: leftX }}
-        >
-          <img
-            src="/images/temple-gopuram.png"
-            alt="Ornate South Indian temple gopuram"
-            fetchPriority="high"
-          />
-        </motion.div>
-        <motion.div
-          className="temple-half temple-right"
-          style={reduce ? undefined : { x: rightX }}
-        >
-          <img
-            src="/images/temple-gopuram.png"
-            alt=""
-            aria-hidden="true"
-            fetchPriority="high"
-          />
-        </motion.div>
-        <motion.div
-          className="portal-glow"
-          style={reduce ? { opacity: 0 } : { opacity: glow }}
+        <img
+          className="temple-image"
+          src="/images/22.jpg"
+          alt="Ornate South Indian temple gopuram"
+          fetchPriority="high"
         />
       </motion.div>
       <motion.div
