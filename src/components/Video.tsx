@@ -1,6 +1,11 @@
-import { Reveal, SectionHeading } from './shared';
-import { weddingData } from '../data/weddingData';
-export default function Video() {
+import { Reveal, SectionHeading } from "./shared";
+import { weddingData } from "../data/weddingData";
+
+type VideoProps = {
+  onPlaybackStart: () => void;
+};
+
+export default function Video({ onPlaybackStart }: VideoProps) {
   return (
     <section className="video-section section-pad">
       <Reveal>
@@ -8,16 +13,32 @@ export default function Video() {
           eyebrow="A moment before the big day"
           title="A little preview of our love"
         />
+
         <div className="video-frame">
           <iframe
             src={weddingData.videoUrl}
-            title="A pre-wedding film"
+            title="Nishant and Diksha Wedding Invitation"
             loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
+            width={560}
+            height={315}
+            allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen
+            referrerPolicy="strict-origin-when-cross-origin"
+            onFocus={onPlaybackStart}
           />
         </div>
+
+        <div className="video-actions">
+          <a
+            href={weddingData.videoUrl.replace("/preview", "/view")}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="video-full-link"
+          >
+            Watch Full Video
+          </a>
+        </div>
+
         <p className="video-note">
           Our story, in moving pictures. More memories coming soon.
         </p>

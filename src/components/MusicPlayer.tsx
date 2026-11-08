@@ -1,7 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { Music2, VolumeX } from 'lucide-react';
+import { useEffect, useRef, useState } from "react";
+import { Music2, VolumeX } from "lucide-react";
 
-export default function MusicPlayer() {
+type MusicPlayerProps = {
+  videoActive: boolean;
+};
+
+export default function MusicPlayer({ videoActive }: MusicPlayerProps) {
   const [playing, setPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -16,12 +20,18 @@ export default function MusicPlayer() {
         await audio.play();
         setPlaying(true);
       } catch (error) {
-        console.log('Autoplay was blocked. Click the music button to play.');
+        console.log("Autoplay was blocked. Click the music button to play.");
       }
     };
 
     void startMusic();
   }, []);
+
+  useEffect(() => {
+    if (!videoActive) return;
+
+    audioRef.current?.pause();
+  }, [videoActive]);
 
   const toggle = async () => {
     const audio = audioRef.current;
@@ -32,7 +42,7 @@ export default function MusicPlayer() {
         await audio.play();
         setPlaying(true);
       } catch (error) {
-        console.error('Music playback failed:', error);
+        console.error("Music playback failed:", error);
       }
     } else {
       audio.pause();
@@ -52,13 +62,13 @@ export default function MusicPlayer() {
       />
 
       <button
-        className={`music-button ${playing ? 'is-playing' : ''}`}
+        className={`music-button ${playing ? "is-playing" : ""}`}
         onClick={toggle}
-        aria-label={playing ? 'Pause wedding music' : 'Play wedding music'}
-        title={playing ? 'Pause music' : 'Play music'}
+        aria-label={playing ? "Pause wedding music" : "Play wedding music"}
+        title={playing ? "Pause music" : "Play music"}
       >
         {playing ? <Music2 size={17} /> : <VolumeX size={17} />}
-        <span>{playing ? 'Music on' : 'Music'}</span>
+        <span>{playing ? "Music on" : "Music"}</span>
       </button>
     </>
   );
