@@ -34,7 +34,7 @@ export default function Hero() {
       >
         <img
           className="temple-image"
-          src="/images/22.jpg"
+          src="/images/temple-gopuram.png"
           alt="Ornate South Indian temple gopuram"
           fetchPriority="high"
         />
