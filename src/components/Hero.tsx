@@ -38,8 +38,6 @@ export default function Hero() {
         <h1>
           Nishant <i>weds</i> Diksha
         </h1>
-        <div className="hero-date">13 December 2026</div>
-        <div className="hero-rule" />
       </div>
       <motion.div
         className="temple-stage"

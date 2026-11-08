@@ -2,15 +2,23 @@ import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 const photos = [
   {
-    url: 'https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=85',
+    url: '/images/1.jpg',
     alt: 'Romantic wedding celebration with warm lights',
   },
   {
-    url: 'https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=85',
+    url: '/images/3.jpg',
     alt: 'Elegant wedding ceremony details',
   },
   {
-    url: 'https://images.unsplash.com/photo-1537633552985-df8429e8048b?auto=format&fit=crop&w=1200&q=85',
+    url: '/images/4.jpg',
+    alt: 'A couple celebrating their wedding',
+  },
+  {
+    url: '/images/5.jpg',
+    alt: 'A couple celebrating their wedding',
+  },
+  {
+    url: '/images/6.jpg',
     alt: 'A couple celebrating their wedding',
   },
 ];

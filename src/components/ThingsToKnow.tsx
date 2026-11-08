@@ -23,9 +23,6 @@ export default function ThingsToKnow() {
             <Phone />
             <h3>Need a hand?</h3>
             <p>{weddingData.contact}</p>
-            <span className="detail-muted">
-              Family contact details can be added here.
-            </span>
           </article>
           <article className="thing-card">
             <Bell />

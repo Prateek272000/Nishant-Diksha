@@ -17,7 +17,7 @@ export default function DateReveal() {
           aria-label="Reveal the wedding date"
         >
           <span className="seal-top">SAVE THE DATE</span>
-          <span className="seal-day">13</span>
+          <span className="seal-day">??</span>
           <span className="seal-month">DECEMBER · 2026</span>
           <span className="seal-bottom">{open ? '✧' : 'TAP TO REVEAL'}</span>
         </button>

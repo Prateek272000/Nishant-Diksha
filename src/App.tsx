@@ -30,8 +30,6 @@ export default function App() {
         <Video />
         <Countdown />
         <ThingsToKnow />
-        <RSVP />
-        <Wishes />
       </main>
       <Footer />
       <MusicPlayer />

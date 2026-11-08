@@ -1,64 +1,65 @@
 import { useEffect, useRef, useState } from 'react';
 import { Music2, VolumeX } from 'lucide-react';
+
 export default function MusicPlayer() {
   const [playing, setPlaying] = useState(false);
-  const ctx = useRef<AudioContext | null>(null);
-  const nodes = useRef<OscillatorNode[]>([]);
-  const stop = () => {
-    nodes.current.forEach((n) => {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio.volume = 0.5;
+
+    const startMusic = async () => {
       try {
-        n.stop();
-      } catch {}
-    });
-    nodes.current = [];
-    void ctx.current?.suspend();
-    setPlaying(false);
-  };
+        await audio.play();
+        setPlaying(true);
+      } catch (error) {
+        console.log('Autoplay was blocked. Click the music button to play.');
+      }
+    };
+
+    void startMusic();
+  }, []);
+
   const toggle = async () => {
-    if (playing) {
-      stop();
-      return;
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
+      try {
+        await audio.play();
+        setPlaying(true);
+      } catch (error) {
+        console.error('Music playback failed:', error);
+      }
+    } else {
+      audio.pause();
+      setPlaying(false);
     }
-    const AudioContextClass =
-      window.AudioContext ||
-      (window as typeof window & { webkitAudioContext?: typeof AudioContext })
-        .webkitAudioContext;
-    if (!AudioContextClass) return;
-    ctx.current ??= new AudioContextClass();
-    await ctx.current.resume();
-    [110, 164.81, 220].forEach((hz, i) => {
-      const osc = ctx.current!.createOscillator();
-      const gain = ctx.current!.createGain();
-      osc.type = 'sine';
-      osc.frequency.value = hz;
-      gain.gain.value = i === 0 ? 0.025 : 0.009;
-      osc.connect(gain);
-      gain.connect(ctx.current!.destination);
-      osc.start();
-      nodes.current.push(osc);
-    });
-    setPlaying(true);
   };
-  useEffect(
-    () => () => {
-      nodes.current.forEach((n) => {
-        try {
-          n.stop();
-        } catch {}
-      });
-      void ctx.current?.close();
-    },
-    [],
-  );
+
   return (
-    <button
-      className={`music-button ${playing ? 'is-playing' : ''}`}
-      onClick={toggle}
-      aria-label={playing ? 'Pause ambient music' : 'Play ambient music'}
-      title={playing ? 'Pause ambience' : 'Play ambience'}
-    >
-      {playing ? <Music2 size={17} /> : <VolumeX size={17} />}
-      <span>{playing ? 'Ambience on' : 'Ambience'}</span>
-    </button>
+    <>
+      <audio
+        ref={audioRef}
+        src="/wedding-music.mp3"
+        loop
+        preload="auto"
+        onPlay={() => setPlaying(true)}
+        onPause={() => setPlaying(false)}
+      />
+
+      <button
+        className={`music-button ${playing ? 'is-playing' : ''}`}
+        onClick={toggle}
+        aria-label={playing ? 'Pause wedding music' : 'Play wedding music'}
+        title={playing ? 'Pause music' : 'Play music'}
+      >
+        {playing ? <Music2 size={17} /> : <VolumeX size={17} />}
+        <span>{playing ? 'Music on' : 'Music'}</span>
+      </button>
+    </>
   );
 }

@@ -5,29 +5,21 @@ export const weddingData = {
     names: 'Nishant & Diksha',
     date: '13 December 2026',
     dateISO: '2026-12-13T18:00:00+05:30',
-    hashtag: '#NishantWedsDiksha',
+    hashtag: '#Niksha',
   },
-  families: { groom: 'The Kapoor Family', bride: 'The Bhatt Family' },
+  families: { groom: 'The Sharma Family', bride: 'The Dubey Family' },
   events: [
     {
       title: 'Haldi & Mehndi',
       time: '2:00 PM',
-      date: '13 December 2026',
+      date: '12 December 2026',
       venue: 'G-115, Delta-2, Greater Noida',
       note: 'A little colour, laughter and blessings to begin the celebrations.',
       icon: '✧',
     },
     {
-      title: 'Sangeet Night',
-      time: 'Celebration details to follow',
-      date: '13 December 2026',
-      venue: 'Details to be shared by the families',
-      note: 'An evening for music, dance and memories we will cherish.',
-      icon: '❋',
-    },
-    {
       title: 'The Wedding',
-      time: 'Baarat chadhat · 6:00 PM',
+      time: '6:00 PM',
       date: '13 December 2026',
       venue: 'The Wedding Planet, Sector-1, Bisrakh, Greater Noida',
       note: 'The day we begin our forever, surrounded by all our favourite people.',
@@ -45,7 +37,7 @@ export const weddingData = {
         },
         {
           time: '6:00 PM',
-          title: 'Baarat Chadhat',
+          title: 'Baraat Chadhat',
           venue: 'The Wedding Planet, Sector-1, Bisrakh, Greater Noida',
         },
       ],
@@ -53,6 +45,6 @@ export const weddingData = {
   ],
   venue: 'The Wedding Planet, Sector-1, Bisrakh, Greater Noida',
   contact:
-    'Please reach out to the family for any assistance with directions or arrangements.',
-  videoUrl: 'https://www.youtube-nocookie.com/embed/ScMzIvxBSi4?rel=0',
+    'Please reach out to the family for any assistance with directions or arrangements.\n 9873332095 · 9540332725 · 7982474400',
+  videoUrl:'https://drive.google.com/file/d/1oj-l91kEa7UPlArOsnhWGp53HlDpeOuN/preview',
 };

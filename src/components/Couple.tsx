@@ -6,7 +6,7 @@ export default function Couple() {
       <Reveal>
         <SectionHeading
           eyebrow="Two hearts, one story"
-          title="The Bride & The Groom"
+          title="The Groom & The Bride"
         />
         <p className="story-copy">
           Some stories are written in the stars. Ours brought two families
