@@ -1,0 +1,2 @@
+import { ArrowUp } from 'lucide-react'; import { weddingData } from '../data/weddingData'; import { Ornament } from './shared';
+export default function Footer(){return <footer className="footer"><Ornament/><p className="eyebrow">With love and gratitude</p><h2>We cannot wait<br/><i>to celebrate with you.</i></h2><p className="footer-names">{weddingData.couple.names}</p><p className="footer-date">13 · 12 · 2026</p><a href="#top" className="back-top" aria-label="Back to top"><ArrowUp size={17}/></a><small>MADE WITH LOVE · GREATER NOIDA</small></footer>}

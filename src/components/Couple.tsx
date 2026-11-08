@@ -1,0 +1,2 @@
+import { Reveal, SectionHeading } from './shared'; import Carousel from './Carousel';
+export default function Couple(){return <section className="couple-section section-pad" id="our-story"><Reveal><SectionHeading eyebrow="Two hearts, one story" title="The Bride & The Groom"/><p className="story-copy">Some stories are written in the stars. Ours brought two families together, and now we are ready to write the most beautiful chapter yet — with you by our side.</p><Carousel/><div className="story-signature">With love, <span>Nishant & Diksha</span></div></Reveal></section>}
