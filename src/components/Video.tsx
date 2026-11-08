@@ -1,2 +1,27 @@
-import { Reveal, SectionHeading } from './shared'; import { weddingData } from '../data/weddingData';
-export default function Video(){return <section className="video-section section-pad"><Reveal><SectionHeading eyebrow="A moment before the big day" title="A little preview of our love"/><div className="video-frame"><iframe src={weddingData.videoUrl} title="A pre-wedding film" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen/></div><p className="video-note">Our story, in moving pictures. More memories coming soon.</p></Reveal></section>}
+import { Reveal, SectionHeading } from './shared';
+import { weddingData } from '../data/weddingData';
+export default function Video() {
+  return (
+    <section className="video-section section-pad">
+      <Reveal>
+        <SectionHeading
+          eyebrow="A moment before the big day"
+          title="A little preview of our love"
+        />
+        <div className="video-frame">
+          <iframe
+            src={weddingData.videoUrl}
+            title="A pre-wedding film"
+            loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
+        <p className="video-note">
+          Our story, in moving pictures. More memories coming soon.
+        </p>
+      </Reveal>
+    </section>
+  );
+}

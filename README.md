@@ -2,6 +2,8 @@
 
 A mobile-first React + TypeScript wedding invitation built with Vite, Tailwind CSS, Framer Motion and Lucide React.
 
+See [CODE_GUIDE.md](./CODE_GUIDE.md) for a full walkthrough of the app structure, components, data, styling, and development workflow.
+
 ## Run locally
 
 ```bash

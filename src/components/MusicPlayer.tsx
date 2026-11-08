@@ -1,2 +1,64 @@
-import { useEffect, useRef, useState } from 'react'; import { Music2, VolumeX } from 'lucide-react';
-export default function MusicPlayer(){const [playing,setPlaying]=useState(false);const ctx=useRef<AudioContext|null>(null);const nodes=useRef<OscillatorNode[]>([]);const stop=()=>{nodes.current.forEach(n=>{try{n.stop()}catch{}});nodes.current=[];void ctx.current?.suspend();setPlaying(false)};const toggle=async()=>{if(playing){stop();return}const AudioContextClass=window.AudioContext||(window as typeof window & {webkitAudioContext?:typeof AudioContext}).webkitAudioContext;if(!AudioContextClass)return;ctx.current??=new AudioContextClass();await ctx.current.resume();[110,164.81,220].forEach((hz,i)=>{const osc=ctx.current!.createOscillator();const gain=ctx.current!.createGain();osc.type='sine';osc.frequency.value=hz;gain.gain.value=i===0?.025:.009;osc.connect(gain);gain.connect(ctx.current!.destination);osc.start();nodes.current.push(osc)});setPlaying(true)};useEffect(()=>()=>{nodes.current.forEach(n=>{try{n.stop()}catch{}});void ctx.current?.close()},[]);return <button className={`music-button ${playing?'is-playing':''}`} onClick={toggle} aria-label={playing?'Pause ambient music':'Play ambient music'} title={playing?'Pause ambience':'Play ambience'}>{playing?<Music2 size={17}/>:<VolumeX size={17}/>}<span>{playing?'Ambience on':'Ambience'}</span></button>}
+import { useEffect, useRef, useState } from 'react';
+import { Music2, VolumeX } from 'lucide-react';
+export default function MusicPlayer() {
+  const [playing, setPlaying] = useState(false);
+  const ctx = useRef<AudioContext | null>(null);
+  const nodes = useRef<OscillatorNode[]>([]);
+  const stop = () => {
+    nodes.current.forEach((n) => {
+      try {
+        n.stop();
+      } catch {}
+    });
+    nodes.current = [];
+    void ctx.current?.suspend();
+    setPlaying(false);
+  };
+  const toggle = async () => {
+    if (playing) {
+      stop();
+      return;
+    }
+    const AudioContextClass =
+      window.AudioContext ||
+      (window as typeof window & { webkitAudioContext?: typeof AudioContext })
+        .webkitAudioContext;
+    if (!AudioContextClass) return;
+    ctx.current ??= new AudioContextClass();
+    await ctx.current.resume();
+    [110, 164.81, 220].forEach((hz, i) => {
+      const osc = ctx.current!.createOscillator();
+      const gain = ctx.current!.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = hz;
+      gain.gain.value = i === 0 ? 0.025 : 0.009;
+      osc.connect(gain);
+      gain.connect(ctx.current!.destination);
+      osc.start();
+      nodes.current.push(osc);
+    });
+    setPlaying(true);
+  };
+  useEffect(
+    () => () => {
+      nodes.current.forEach((n) => {
+        try {
+          n.stop();
+        } catch {}
+      });
+      void ctx.current?.close();
+    },
+    [],
+  );
+  return (
+    <button
+      className={`music-button ${playing ? 'is-playing' : ''}`}
+      onClick={toggle}
+      aria-label={playing ? 'Pause ambient music' : 'Play ambient music'}
+      title={playing ? 'Pause ambience' : 'Play ambience'}
+    >
+      {playing ? <Music2 size={17} /> : <VolumeX size={17} />}
+      <span>{playing ? 'Ambience on' : 'Ambience'}</span>
+    </button>
+  );
+}

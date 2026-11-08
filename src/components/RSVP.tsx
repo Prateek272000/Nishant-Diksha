@@ -1,3 +1,153 @@
-import { useState, type FormEvent } from 'react'; import { Reveal, SectionHeading } from './shared';
-type RSVPEntry={name:string;email:string;attendance:string;guests:string;message:string};
-export default function RSVP(){const [choice,setChoice]=useState('');const [sent,setSent]=useState(false);const [form,setForm]=useState<RSVPEntry>({name:'',email:'',attendance:'yes',guests:'1',message:''});const update=(key:keyof RSVPEntry,value:string)=>setForm(v=>({...v,[key]:value}));const submit=(e:FormEvent)=>{e.preventDefault();if(!choice)return;localStorage.setItem('nishant-diksha-rsvp',JSON.stringify({...form,attendance:choice,submittedAt:new Date().toISOString()}));setSent(true)};return <section className="rsvp-section section-pad" id="rsvp"><Reveal><SectionHeading eyebrow="Kindly respond" title="Will you join us?" light/><p className="section-intro light-intro">Your presence would mean the world to us. Please let us know by sharing your response.</p>{sent?<div className="rsvp-success"><span>✧</span><h3>Thank you, {form.name}!</h3><p>Your response has been saved on this device. We look forward to celebrating together.</p><button className="outline-button" onClick={()=>{setSent(false);setChoice('')}}>Edit response</button></div>:<form className="rsvp-form" onSubmit={submit}><fieldset><legend>Will you be celebrating with us?</legend><div className="choice-row"><button type="button" className={choice==='yes'?'chosen':''} onClick={()=>{setChoice('yes');update('attendance','yes')}}>Joyfully accepts</button><button type="button" className={choice==='no'?'chosen':''} onClick={()=>{setChoice('no');update('attendance','no')}}>Regretfully declines</button></div></fieldset>{choice&&<div className="form-fields"><label>Your full name<input required value={form.name} onChange={e=>update('name',e.target.value)} placeholder="Name" autoComplete="name"/></label><label>Email address<input required type="email" value={form.email} onChange={e=>update('email',e.target.value)} placeholder="you@example.com" autoComplete="email"/></label>{choice==='yes'&&<label>Number of guests<select value={form.guests} onChange={e=>update('guests',e.target.value)}><option value="1">1 guest</option><option value="2">2 guests</option><option value="3">3 guests</option><option value="4">4 guests</option><option value="5">5 guests</option></select></label>}<label className="full-field">A note for the couple (optional)<textarea rows={3} value={form.message} onChange={e=>update('message',e.target.value)} placeholder="Send your love..."/></label><button className="submit-button" type="submit">Send my RSVP <span>→</span></button><p className="form-privacy">This demo stores your response in this browser only. Connect a form backend to receive submissions.</p></div>}</form>}</Reveal></section>}
+import { useState, type FormEvent } from 'react';
+import { Reveal, SectionHeading } from './shared';
+type RSVPEntry = {
+  name: string;
+  email: string;
+  attendance: string;
+  guests: string;
+  message: string;
+};
+export default function RSVP() {
+  const [choice, setChoice] = useState('');
+  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState<RSVPEntry>({
+    name: '',
+    email: '',
+    attendance: 'yes',
+    guests: '1',
+    message: '',
+  });
+  const update = (key: keyof RSVPEntry, value: string) =>
+    setForm((v) => ({ ...v, [key]: value }));
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    if (!choice) return;
+    localStorage.setItem(
+      'nishant-diksha-rsvp',
+      JSON.stringify({
+        ...form,
+        attendance: choice,
+        submittedAt: new Date().toISOString(),
+      }),
+    );
+    setSent(true);
+  };
+  return (
+    <section className="rsvp-section section-pad" id="rsvp">
+      <Reveal>
+        <SectionHeading
+          eyebrow="Kindly respond"
+          title="Will you join us?"
+          light
+        />
+        <p className="section-intro light-intro">
+          Your presence would mean the world to us. Please let us know by
+          sharing your response.
+        </p>
+        {sent ? (
+          <div className="rsvp-success">
+            <span>✧</span>
+            <h3>Thank you, {form.name}!</h3>
+            <p>
+              Your response has been saved on this device. We look forward to
+              celebrating together.
+            </p>
+            <button
+              className="outline-button"
+              onClick={() => {
+                setSent(false);
+                setChoice('');
+              }}
+            >
+              Edit response
+            </button>
+          </div>
+        ) : (
+          <form className="rsvp-form" onSubmit={submit}>
+            <fieldset>
+              <legend>Will you be celebrating with us?</legend>
+              <div className="choice-row">
+                <button
+                  type="button"
+                  className={choice === 'yes' ? 'chosen' : ''}
+                  onClick={() => {
+                    setChoice('yes');
+                    update('attendance', 'yes');
+                  }}
+                >
+                  Joyfully accepts
+                </button>
+                <button
+                  type="button"
+                  className={choice === 'no' ? 'chosen' : ''}
+                  onClick={() => {
+                    setChoice('no');
+                    update('attendance', 'no');
+                  }}
+                >
+                  Regretfully declines
+                </button>
+              </div>
+            </fieldset>
+            {choice && (
+              <div className="form-fields">
+                <label>
+                  Your full name
+                  <input
+                    required
+                    value={form.name}
+                    onChange={(e) => update('name', e.target.value)}
+                    placeholder="Name"
+                    autoComplete="name"
+                  />
+                </label>
+                <label>
+                  Email address
+                  <input
+                    required
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => update('email', e.target.value)}
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                  />
+                </label>
+                {choice === 'yes' && (
+                  <label>
+                    Number of guests
+                    <select
+                      value={form.guests}
+                      onChange={(e) => update('guests', e.target.value)}
+                    >
+                      <option value="1">1 guest</option>
+                      <option value="2">2 guests</option>
+                      <option value="3">3 guests</option>
+                      <option value="4">4 guests</option>
+                      <option value="5">5 guests</option>
+                    </select>
+                  </label>
+                )}
+                <label className="full-field">
+                  A note for the couple (optional)
+                  <textarea
+                    rows={3}
+                    value={form.message}
+                    onChange={(e) => update('message', e.target.value)}
+                    placeholder="Send your love..."
+                  />
+                </label>
+                <button className="submit-button" type="submit">
+                  Send my RSVP <span>→</span>
+                </button>
+                <p className="form-privacy">
+                  This demo stores your response in this browser only. Connect a
+                  form backend to receive submissions.
+                </p>
+              </div>
+            )}
+          </form>
+        )}
+      </Reveal>
+    </section>
+  );
+}
